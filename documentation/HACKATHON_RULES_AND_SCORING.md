@@ -8,8 +8,9 @@
 ## 🏆 Overview
 
 - **Event**: iQOO City Battles 2026 (Aug – Oct 2026)
+- **Phase 1 Idea Submission Deadline**: **8 September 2026**
+- **On-Site Hackathon**: **Sat 12 – Sun 13 September 2026** (30-Hour On-Ground Battle)
 - **Total Series Prize Pool**: **₹40,00,000** across City Battles, Finale, and Special Awards
-- **Format**: 30-Hour On-Ground Battle (Sat 08:00 AM Check-in → Sun 16:15 PM Awards)
 - **Grand Finale**: Oct 9–11, 2026 in Bengaluru (48 Hours)
 - **Official Repository**: [sameerreddy789/IQOO_Hackathon](https://github.com/sameerreddy789/IQOO_Hackathon)
 
