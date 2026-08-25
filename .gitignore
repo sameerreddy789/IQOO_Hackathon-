@@ -1,0 +1,22 @@
+# Node / Build artifacts
+node_modules/
+dist/
+build/
+.next/
+out/
+.cache/
+
+# Environment & local secrets
+.env
+.env.local
+.env.*.local
+
+# IDE / System
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Scratch & temporary files
+scratch/
+*.log
