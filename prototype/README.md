@@ -22,7 +22,7 @@ request --> DECOMPOSE --> SCOUT --> COMPILE --> .devcontext/ + init.sh
 
 | Stage | Status | Notes |
 | :--- | :--- | :--- |
-| **DECOMPOSE** | Verified working, fully offline | Quantized Phi-3-mini int4 via `onnxruntime-genai`. Schema-valid graph on attempt 1 of 3. See [verified results](#verified-decompose-results). |
+| **DECOMPOSE** | Verified working, offline proven | Quantized Phi-3-mini int4 via `onnxruntime-genai`. 5/5 schema-valid, all first-attempt. See [verified results](#verified-decompose-results). |
 | **SCOUT** | Code complete, **unverified against the live API** | Needs an `EXA_API_KEY`. Degrades cleanly to zero candidates without one. See [Known gaps](#known-gaps). |
 | **COMPILE** | Verified working | 34 checks green. Writes the full brain folder plus a syntax-valid `init.sh`. |
 | **CAPTURE** | Not started | Camera OCR + mic STT, scheduled for the on-site build. |
@@ -30,21 +30,46 @@ request --> DECOMPOSE --> SCOUT --> COMPILE --> .devcontext/ + init.sh
 
 ### Verified DECOMPOSE results
 
-Real output from the local model is committed at
-[`examples/graph_audio_model_output.json`](./examples/graph_audio_model_output.json),
-annotated with its provenance and metrics. It is verbatim model output, not
-hand-written.
+The gating suite is five deliberately varied requests, including one terse
+lowercase prompt and one with an embedded stack preference. Reproduce with
+`python -m devcontext.decompose --suite`.
 
-| Measure | Result |
-| :--- | :--- |
-| Request | "Build an audio streaming app using Node.js and a fast canvas frontend with offline sync" |
-| Schema-valid | Yes, on attempt 1 of 3 (no coercion needed) |
-| Nodes produced | 4 |
-| Generation time | **702 s on CPU** |
-| Network | Disabled during generation |
+| # | Request | Result | Nodes | Attempts | Time |
+| :--- | :--- | :--- | :---: | :---: | :---: |
+| 1 | Audio streaming app, Node.js, canvas frontend, offline sync | VALID | 4 | 1 of 3 | 546 s |
+| 2 | Telemedicine booking with video consults and online payment | VALID | 4 | 1 of 3 | 549 s |
+| 3 | `small cli tool to dedupe photos on my nas by perceptual hash` | VALID | 2 | 1 of 3 | 477 s |
+| 4 | Offline-capable attendance system for a tier-2 college | VALID | 3 | 1 of 3 | 467 s |
+| 5 | Real-time multiplayer quiz game for Android with anti-cheat | VALID | 4 | 1 of 3 | 420 s |
 
-That 702-second figure is the point of the on-site work, not a footnote. A
-3.8B int4 model on a laptop CPU is roughly two orders of magnitude off usable
+**5/5 schema-valid, every one on the first attempt.** The repair loop never had to
+fire, which is a stronger result than the 4/5 gate required. Verbatim output from
+run 1 is committed at
+[`examples/graph_audio_model_output.json`](./examples/graph_audio_model_output.json).
+
+Two honest notes on this table:
+
+- **Run 3 produced 2 nodes while the prompt asks for 3 to 7.** The schema permits
+  a minimum of 2, so it passed validation. For a single-purpose dedupe CLI, two
+  nodes is arguably the right answer, so this is recorded as a prompt/schema
+  tension rather than patched over. Worth revisiting if node counts skew low on
+  richer requests.
+- **The repair loop is therefore untested against real model failure.** It is
+  covered by 36 unit checks against synthetic malformed output, but no live
+  generation has yet needed it.
+
+### Offline execution: proven, not asserted
+
+The "runs with no network" claim was verified empirically rather than argued from
+the absence of HTTP imports. With `HTTP_PROXY` and `HTTPS_PROXY` both pointed at a
+dead port (`127.0.0.1:9`) and `HF_HUB_OFFLINE=1` set, decomposition still produced
+a schema-valid graph on attempt 1 in 248 seconds. Reproduce with the commands in
+[DEMO.md](./DEMO.md#proving-the-offline-claim).
+
+### The latency finding
+
+Average generation was **492 seconds on laptop CPU**. That figure is the point of
+the on-site work, not a footnote: a 3.8B int4 model on CPU is far from usable
 interactive latency. NPU-accelerated inference through `onnxruntime-genai`'s
 Android bindings is what makes this loop viable on the phone, and it is the first
 Green Light task in the [on-site plan](../documentation/ONSITE_BUILD_PLAN.md).
