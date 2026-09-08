@@ -7,40 +7,40 @@
 
 ## 1. Idea / Project Title
 
-**Primary choice:**
+**LOCKED — this is what was submitted:**
 
 ```text
 DevContext AI: Your Project's Brain, Built Before You Code
 ```
-
-**Alternate (more literal, if the jury pool skews technical):**
-
-```text
-DevContext AI: On-Device Architecture Blueprinting for Developers
-```
-
-> [!NOTE]
-> The original draft — "DevContext AI: Local Memory Engine & Semantic Architecture Blueprint" — stacks two subtitles and runs long. The form guidance asks for short, punchy and memorable, reflecting the core value proposition. Both options above satisfy the 5-character minimum and survive being read aloud on a slide. Pick whichever the team prefers.
 
 ---
 
 ## 2. Selected Track
 
 ```text
-Track #6: Developer Tools (Eligible for City Battles + National Grand Finale)
+Track #6: Developer Tools
 ```
+
+Eligible for City Battles **and** the National Grand Finale. Tracks 1–3 are City
+Battles only, so this choice preserves the Bengaluru path.
 
 ---
 
 ## 3. Project Description (Comprehensive Maximizer Field)
 
-DevContext AI is a phone-first developer orchestration canvas built with Flutter that fixes the pre-coding blueprint phase for early-career developers and engineering students across India. Rather than shipping another cramped mobile IDE, it works as an architecture companion running beside the developer's desktop workspace.
+> [!NOTE]
+> **LOCKED — submitted text.** The offline claim is deliberately scoped to
+> *requirement decomposition* rather than the whole system, because the Exa
+> scouting stage is a cloud call. An unscoped "completely offline" claim
+> contradicts paragraph three and invites a reviewer to discount the rest.
 
-Input is multi-modal and on-device. A developer dictates app requirements into the microphone, or points the phone camera at a whiteboard architecture sketch and lets Google ML Kit's on-device OCR read the layout. A quantized Small Language Model, served through ONNX Runtime on the Snapdragon NPU, turns that input into a structured architecture JSON node tree. Because the model runs locally, decomposition keeps working with no network at all — which matters directly under the hackathon's Red Light constraint, when the laptop is locked and connectivity is unreliable.
+DevContext AI is a phone-first developer orchestration canvas built with Flutter that optimizes the pre-coding blueprint phase for early-career developers and software engineering students across India. Instead of building an intrusive, complex mobile IDE, the tool acts as a dedicated system architecture blueprint companion running alongside a developer's desktop workspace environment.
 
-The Flutter client then calls the Exa AI Neural Search API over HTTPS with no desktop localhost dependency in the path. Parallel semantic queries scout high-quality open-source boilerplates, libraries, and UI component structures across GitHub, GitLab, and Bitbucket, while a second domain-filtered pass pulls live community sentiment and open bug complaints from developer channels on Reddit. This is the signal that junior developers currently miss: the thread explaining that a library they are about to adopt has been unmaintained for fourteen months.
+The system workflow utilizes on-device multi-modal sensory input so that requirement decomposition runs entirely offline, with no network dependency. Developers can dictate verbal app specifications via the device microphone or point their phone camera at a physical whiteboard architectural diagram to capture layouts using Google ML Kit on-device OCR. A localized Small Language Model (SLM), optimized via ONNX Runtime to leverage the flagship Snapdragon NPU hardware acceleration layer, processes the incoming inputs locally on the device, decomposing raw requirements into a structured system architecture JSON node tree with zero network latency.
 
-The developer works through an animated node-graph interface on the phone: swipe between requirement nodes, review repository health metrics, open documentation in an embedded webview, and approve the final stack. On confirmation the phone renders the compiled brain on screen, then pushes the packed schema across the iQOO Office Kit bridge using shared clipboard and file transfer. A lightweight CLI listener on the laptop receives that payload and writes a persistent Brain Folder (`.devcontext/`) plus an automated bootstrap script (`init.sh`) into the IDE root. The developer runs `bash init.sh` and their dependencies, module clones, and path mappings resolve instantly — leaving a private, local, vector-backed context anchor for the entire build lifecycle.
+To populate this blueprint with live data, the Flutter mobile app client executes direct, secure cloud HTTPS requests to the Exa AI Neural Search API. This pipeline runs parallel semantic queries to scout high-quality open-source boilerplates, framework libraries, and UI component structures across global public platforms (GitHub, GitLab, Bitbucket), while simultaneously extracting community trend metrics and active bug complaints directly from developer-specific channels on Reddit.
+
+The developer interacts with a highly visual node-graph interface on their phone screen, enabling them to swipe through tool nodes, review live code health analytics, and click integrated webview documentation links before approving their software architecture stack. Upon final validation, the phone compiles the framework configuration into a local layout. Using the native iQOO Office Kit shared clipboard and file transfer data bridges, the mobile client throws the packed data schema straight to a lightweight terminal CLI background listener running on the host laptop. This agent intercepts the stream and automatically initializes a persistent, local "Brain Folder" (`.devcontext/`) and an environmental bootstrap script (`init.sh`) directly into their IDE root directory, providing a robust, private vector-context anchor for the upcoming build lifecycle.
 
 ---
 
@@ -58,21 +58,35 @@ Our team consists of experienced product builders with a track record of shippin
 
 ## 5. What Makes Our Team Stand Out?
 
-Our team combines advanced frontend design expertise with low-level local system automation skills — a rare pairing. Having built the production framework for MohanaMantra 2K26, we are experienced in managing complex client state engines, rendering smooth canvas interactions, and writing bulletproof responsive layouts in React; Flutter is our deliberate choice for this build, giving us one high-performance codebase targeting the phone as the primary surface.
+> [!NOTE]
+> **LOCKED — submitted text.** Because both proficiency fields are dropdowns with
+> no room for reasoning, the justification for each selection is carried here,
+> where a reviewer actually reads it.
 
-We pair that with deep familiarity with open-source automation, local API wrappers, and shell-level script execution, drawn directly from our ArduPilot and WSL toolchain work. We build tools that don't just look good but solve real infrastructure problems for working engineers. We design with a constraint-first mindset, which is why this submission ships a deliberately reduced five-component architecture instead of an ambitious fifteen-module one: we would rather demo something that fully works than describe something that doesn't.
+Our team possesses a unique, highly targeted blend of production frontend design experience and low-level system automation. Having built the core web architecture for the MohanaMantra 2K26 festival, we have proven expertise in managing intricate state machines, animating layouts, and writing bulletproof, audited systems.
+
+What truly sets us apart for this hackathon is our proactive technical preparation. We have already built and validated the underlying local context pipeline in Python using onnxruntime-genai and schema-enforced JSON validation loops completely offline before tonight's submission. We have selected 'Advanced' for LLM integration because we have already wired the system's prompt structures, JSON schema contract, and validation loops against a locally quantized model, verified across five varied requests with no network access. While we have marked 'Intermediate' for Android/Flutter development — as porting local ONNX runtimes via native mobile platform channels represents our highest technical challenge for the on-site sprint — our team's deep background in writing bash/WSL automation scripts, managing data streams, and building robust CLI engines means we are fully equipped to bridge the mobile canvas to the desktop IDE using the iQOO Office Kit ecosystem.
+
+We design with a constraint-first mindset, which is why this submission ships a deliberately reduced five-component architecture instead of an ambitious fifteen-module one: we would rather demo something that fully works than describe something that doesn't.
 
 ---
 
 ## 6. Proficiency Declarations
 
-| Field | Selection |
-| :--- | :--- |
-| **Android Proficiency** | *Team to confirm — recommend Beginner or Intermediate based on honest self-assessment* |
-| **LLM Proficiency** | *Team to confirm — recommend Intermediate given the AIStream multi-modal work* |
+Both are dropdown selections. No free text is accepted, so the reasoning lives in
+[section 5](#5-what-makes-our-team-stand-out).
+
+| Field | Selection | Basis |
+| :--- | :--- | :--- |
+| **Android / Flutter Proficiency** | `Intermediate` | Language structures understood, UI widgets to be built on-site. Mobile ML compilation via native platform bindings is the acknowledged hard part. |
+| **GenAI / LLM Proficiency** | `Advanced` | Local `onnxruntime-genai` pipeline built and validated pre-submission: prompt, draft-07 schema contract, repair loop, 5/5 schema-valid offline. |
 
 > [!WARNING]
-> Do not inflate these. They are self-assessed and a mismatch between a declared "Advanced" and on-site output is far more damaging than an honest "Beginner".
+> `Advanced` on LLM is defensible because it is backed by committed, reproducible
+> work in this repository. `Intermediate` on Android is the honest call for a stack
+> nobody on the team has shipped — be ready for a judge to probe it at table
+> judging, and answer with the platform-channel plan from
+> [ONSITE_BUILD_PLAN.md](./ONSITE_BUILD_PLAN.md).
 
 ---
 
@@ -80,39 +94,71 @@ We pair that with deep familiarity with open-source automation, local API wrappe
 
 | Field | Status |
 | :--- | :--- |
-| **Video Walkthrough URL** | Delegated — concept walkthrough with voiceover over the node-canvas mock |
-| **Prototype URL** | GitHub repo, see [ONSITE_BUILD_PLAN.md](./ONSITE_BUILD_PLAN.md) for what ships tonight vs. on-site |
-| **Deck / Document** | Delegated — PDF/PPT under 25 MB, or Drive link with open link permissions |
+| **Prototype URL** | `https://github.com/sameerreddy789/IQOO_Hackathon-/tree/phase-1-submission-prototype` |
+| **Video Walkthrough URL** | Delegated — voiceover over the node-canvas mock, or the 20-second terminal capture from [DEMO.md](../prototype/DEMO.md) |
+| **Deck / Document** | Delegated — PDF/PPT under 25 MB, or Drive link with permissions open to anyone |
+
+What a reviewer finds at the Prototype URL: a working local-SLM decomposition
+pipeline (5/5 schema-valid, offline execution verified), the Exa scouting layer,
+the `.devcontext/` generator, 70 passing checks, and
+[prototype/README.md](../prototype/README.md) stating plainly which stages are
+built and which are scheduled for Chennai.
 
 ---
 
 ## 8. Pre-Submit Checklist
 
-- [ ] Title selected from section 1
-- [ ] Description pasted, verified over 50 characters, reads cleanly
-- [ ] Prior builds pasted
-- [ ] Team standout pasted
-- [ ] Android proficiency selected
-- [ ] LLM proficiency selected
-- [ ] Deck uploaded (<25 MB) or link permissions confirmed open to anyone
-- [ ] Prototype URL added if repo is public
-- [ ] Video URL added if recorded
+Paste in order. Every field below has final copy in this document.
+
+- [ ] Title from section 1
+- [ ] Track from section 2
+- [ ] Description from section 3 (four paragraphs, well over the 50-character minimum)
+- [ ] Prior builds from section 4
+- [ ] Team standout from section 5
+- [ ] Android / Flutter dropdown → `Intermediate`
+- [ ] GenAI / LLM dropdown → `Advanced`
+- [ ] Prototype URL from section 7
+- [ ] Deck uploaded (<25 MB) or Drive link permissions confirmed open to anyone
+- [ ] Video URL if recorded (optional)
 - [ ] Originality confirmation checkbox ticked
-- [ ] Submitted from the Team Leader account
+- [ ] Submitted from the **Team Leader** account
+
+Before travelling to Chennai, separate from the submission:
+
+- [ ] Copy `models/` to the physical build machine — 2.73 GB, took 3 h 21 min to
+      download and cannot be repeated on event wifi
+- [ ] Verify Exa with a live key (see [prototype/README.md](../prototype/README.md#known-gaps))
 
 ---
 
-## Appendix: Changes Applied to the Original Draft
+## Appendix: Edit History
 
-Recorded for transparency — veto any of these and the original wording goes back in.
+Recorded so the reasoning behind the locked copy is not lost.
+
+### Correctness fixes carried into the locked version
 
 | # | Change | Reason |
 | :--- | :--- | :--- |
-| 1 | Closed the unmatched parens on `.devcontext/` and `init.sh` | Original had a closing paren with no opener, twice |
+| 1 | Closed unmatched parens on `.devcontext/` and `init.sh` | A closing paren with no opener, twice |
 | 2 | `userflow` → `user flow` | Spelling |
-| 3 | Named the CLI listener as the component that writes the folder | Original implied the clipboard bridge creates directories, which a technical judge would flag as impossible |
-| 4 | Added offline capability as an explicit benefit, tied to Red Light | Strongest consequence of the on-device model choice, absent from the original |
-| 5 | Added Office Kit **file transfer** alongside shared clipboard | HackTracker telemetry measures clipboard, file transfer and remote control — mentioning only one undersells it |
-| 6 | Trimmed ~15% and reduced noun stacking | Phrases like "on-device multi-modal sensory hardware layers" and "processes the incoming sensory arrays" read as machine-generated to a shortlisting reviewer |
-| 7 | Softened "layouts in Flutter and React" to React, with Flutter as a deliberate choice | Nothing in the prior-builds section evidences Flutter; an unsupported claim causes a reviewer to discount the supported ones |
-| 8 | Expanded MBU to Mohan Babu University on first use | Out-of-context reviewer will not know the acronym |
+| 3 | Named the CLI listener as the component that writes the folder | The draft implied the clipboard bridge creates directories. It cannot; a technical judge would flag it. |
+| 4 | Added Office Kit **file transfer** alongside shared clipboard | HackTracker telemetry measures clipboard, file transfer *and* remote control. Naming one undersells it. |
+| 5 | Expanded MBU to Mohan Babu University on first use | An out-of-context reviewer will not know the acronym |
+| 6 | Fixed three missing spaces after sentence-ending periods | `environment.The`, `latency.To`, `Reddit.The` — visible typos in the most heavily graded field |
+| 7 | **Scoped the offline claim to requirement decomposition** | An unscoped "functions completely offline" contradicted paragraph three, which describes cloud HTTPS calls to Exa. The scoped version is both true and still strong. |
+| 8 | Replaced "map multi-modal schemas" in section 5 with the verified five-request result | Nothing multi-modal has been built; camera OCR and voice are on-site work. Swapped an unverifiable claim for a defensible number. |
+| 9 | Softened the Flutter capability claim | Nothing in section 4 evidences Flutter. An unsupported claim makes a reviewer discount the supported ones. |
+
+### Deliberately reverted
+
+A round of de-jargoning trimmed phrases such as "on-device multi-modal sensory
+hardware layers" and "processes the incoming sensory arrays" on the grounds that
+dense noun stacking reads as machine-generated. The team chose to keep the denser
+phrasing in the locked copy. Noted as a stylistic preference, not an error — the
+factual content is unaffected.
+
+### Title
+
+The first draft, "DevContext AI: Local Memory Engine & Semantic Architecture
+Blueprint", stacked two subtitles. The locked title leads with the value
+proposition instead and survives being read aloud on a slide.

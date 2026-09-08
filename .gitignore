@@ -49,6 +49,10 @@ prototype/.cache/
 brain-out/
 */.devcontext/semantic_cache.db-journal
 
+# Scouting output: may embed fetched page text from Exa results
+scouted.json
+*.scouted.json
+
 # Flutter / Android (on-site build)
 .dart_tool/
 .flutter-plugins
