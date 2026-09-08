@@ -1,0 +1,28 @@
+# Normalize text files on commit, check out with native line endings.
+* text=auto
+
+# Shell scripts MUST stay LF. CRLF makes bash fail with
+# "syntax error near unexpected token $'\r'", which is exactly what bit the
+# init.sh verification during the Phase 1 build.
+*.sh text eol=lf
+*.bash text eol=lf
+init.sh text eol=lf
+
+# Gradle wrapper and Android/Flutter tooling scripts run on Linux build agents.
+gradlew text eol=lf
+*.gradle text eol=lf
+
+# Windows-only scripts keep CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Treat model artifacts and archives as binary if one ever slips past .gitignore.
+*.onnx binary
+*.onnx.data binary
+*.gguf binary
+*.safetensors binary
+*.db binary
+*.png binary
+*.jpg binary
+*.pdf binary

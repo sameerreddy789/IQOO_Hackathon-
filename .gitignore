@@ -20,3 +20,40 @@ Thumbs.db
 # Scratch & temporary files
 scratch/
 *.log
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Model weights: NEVER commit these ---------------------------------
+# The Phi-3-mini int4 artifact is ~2.7 GB. Fetch it with
+#   python prototype/scripts/fetch_model.py
+models/
+*.onnx
+*.onnx.data
+*.gguf
+*.safetensors
+*.bin
+
+# Exa response cache (regenerable, and may contain fetched page text)
+prototype/.cache/
+
+# Pipeline output written during demos
+brain-out/
+*/.devcontext/semantic_cache.db-journal
+
+# Flutter / Android (on-site build)
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+*.iml
+local.properties
+.gradle/
+app/build/

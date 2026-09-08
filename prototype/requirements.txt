@@ -1,0 +1,22 @@
+# DevContext AI prototype — pinned direct dependencies.
+# Python 3.10+ required (onnxruntime-genai constraint).
+#
+#   python -m venv .venv
+#   .venv/Scripts/python -m pip install -r prototype/requirements.txt   # Windows
+#   .venv/bin/python -m pip install -r prototype/requirements.txt       # macOS/Linux
+
+# DECOMPOSE — local quantized SLM inference.
+# Pulls onnxruntime and numpy transitively. Same package family provides the
+# Android bindings used for on-device inference in the on-site build.
+onnxruntime-genai==0.11.4
+
+# Model artifact download (prototype/scripts/fetch_model.py).
+huggingface_hub==1.30.0
+
+# Node graph contract enforcement (draft-07).
+jsonschema==4.26.0
+
+# Deliberately NOT dependencies:
+#   requests      - SCOUT uses urllib.request from the standard library
+#   python-dotenv - .env is parsed directly in scout.py to avoid the dependency
+#   hf_transfer   - deprecated in huggingface_hub 1.30; Xet handles transfers now

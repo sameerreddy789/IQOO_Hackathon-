@@ -1,0 +1,51 @@
+{
+  "_provenance": "Verbatim output from the local quantized SLM. NOT hand-written. Model: microsoft/Phi-3-mini-4k-instruct-onnx, cpu_and_mobile/cpu-int4-rtn-block-32-acc-level-4, via onnxruntime-genai 0.11.4 on CPU. Request: 'Build an audio streaming app using Node.js and a fast canvas frontend with offline sync'. Schema-valid on attempt 1 of 3. Generation took 702.4s on CPU, which is the latency the on-site Snapdragon NPU work is meant to address. The _provenance and _metrics keys are annotations added for the record; strip them before feeding this to the pipeline, or use graph_audio.json instead.",
+  "_metrics": {
+    "attempts_used": 1,
+    "max_attempts": 3,
+    "elapsed_seconds": 702.4,
+    "node_count": 4,
+    "network": "disabled during generation",
+    "coercion_applied": false
+  },
+  "project_name": "Audio Streaming App",
+  "summary": "A Node.js-based audio streaming application with a fast canvas frontend that supports offline syncing of audio streams.",
+  "constraints": [
+    "offline support",
+    "fast canvas rendering"
+  ],
+  "target_platforms": [
+    "web",
+    "server"
+  ],
+  "nodes": [
+    {
+      "id": "audio_stream",
+      "category": "backend",
+      "title": "Audio Stream",
+      "requirement": "Capture and stream audio data in real-time, supporting multiple simultaneous connections.",
+      "search_hint": "audio stream management"
+    },
+    {
+      "id": "canvas_frontend",
+      "category": "frontend",
+      "title": "Canvas Frontend",
+      "requirement": "Render audio waveforms and control playback using a fast canvas interface.",
+      "search_hint": "canvas real-time rendering"
+    },
+    {
+      "id": "sync_service",
+      "category": "infra",
+      "title": "Sync Service",
+      "requirement": "Implement offline syncing of audio streams, allowing users to resume playback after disconnection.",
+      "search_hint": "offline syncing"
+    },
+    {
+      "id": "audio_processor",
+      "category": "backend",
+      "title": "Audio Processor",
+      "requirement": "Apply audio effects and transformations before streaming to the frontend.",
+      "search_hint": "audio processing"
+    }
+  ]
+}

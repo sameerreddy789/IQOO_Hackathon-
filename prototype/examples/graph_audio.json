@@ -1,0 +1,47 @@
+{
+  "project_name": "Riff - Offline-First Audio Streaming",
+  "summary": "An audio streaming app with a Node.js backend, a fast canvas-based player UI, and offline sync so playback survives patchy mobile connectivity.",
+  "constraints": [
+    "must work on intermittent 3G connections",
+    "offline playback of downloaded tracks",
+    "cold start under 2 seconds"
+  ],
+  "target_platforms": ["android", "server"],
+  "nodes": [
+    {
+      "id": "auth",
+      "category": "auth",
+      "title": "Authentication",
+      "requirement": "Email and social login with refresh-token rotation, usable while offline once a session exists.",
+      "search_hint": "jwt refresh token rotation node"
+    },
+    {
+      "id": "media_storage",
+      "category": "storage",
+      "title": "Media Storage & Delivery",
+      "requirement": "Store and range-serve audio files so the player can seek without downloading the whole track.",
+      "search_hint": "http range request audio streaming"
+    },
+    {
+      "id": "offline_sync",
+      "category": "database",
+      "title": "Offline Sync Layer",
+      "requirement": "Queue local mutations while offline and reconcile them with the server once connectivity returns.",
+      "search_hint": "crdt local first sync engine"
+    },
+    {
+      "id": "player_ui",
+      "category": "frontend",
+      "title": "Canvas Player UI",
+      "requirement": "Render a waveform scrubber and playback controls at 60fps on mid-range Android hardware.",
+      "search_hint": "canvas waveform renderer performance"
+    },
+    {
+      "id": "api_server",
+      "category": "backend",
+      "title": "Node.js API Server",
+      "requirement": "Expose track metadata, playlist CRUD, and signed media URLs with range-request passthrough.",
+      "search_hint": "fastify streaming range requests"
+    }
+  ]
+}

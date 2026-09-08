@@ -1,0 +1,91 @@
+{
+  "title": "DevContext AI Architecture Node Graph",
+  "description": "Structured output contract for the DECOMPOSE component. Deliberately shallow: a quantized on-device SLM must be able to satisfy this reliably. Enrichment fields (candidates, rationale) are added downstream by SCOUT and COMPILE, never by the model. Validated against JSON Schema draft-07 (pinned in devcontext/models.py).",
+  "type": "object",
+  "required": ["project_name", "summary", "nodes"],
+  "additionalProperties": false,
+  "properties": {
+    "project_name": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 80,
+      "description": "Short human-readable project name inferred from the request."
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 400,
+      "description": "One or two sentences restating what is being built."
+    },
+    "constraints": {
+      "type": "array",
+      "description": "Non-functional constraints stated or clearly implied by the request (offline support, low bandwidth, privacy, realtime).",
+      "items": { "type": "string", "minLength": 2, "maxLength": 120 },
+      "maxItems": 10,
+      "default": []
+    },
+    "target_platforms": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["android", "ios", "web", "desktop", "server", "cli"]
+      },
+      "maxItems": 6,
+      "default": []
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 12,
+      "description": "The architectural requirement nodes rendered on the Flutter canvas.",
+      "items": {
+        "type": "object",
+        "required": ["id", "category", "title", "requirement"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$",
+            "minLength": 2,
+            "maxLength": 40,
+            "description": "snake_case stable identifier, unique within the graph."
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "auth",
+              "database",
+              "backend",
+              "frontend",
+              "realtime",
+              "storage",
+              "ml",
+              "infra",
+              "payments",
+              "testing",
+              "observability",
+              "other"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 60,
+            "description": "Display label for the canvas node."
+          },
+          "requirement": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 300,
+            "description": "What this part of the system must do, in plain language. Becomes the SCOUT query seed and the embedded text in semantic_cache.db."
+          },
+          "search_hint": {
+            "type": "string",
+            "maxLength": 120,
+            "description": "Optional extra keywords to sharpen the semantic search for this node."
+          }
+        }
+      }
+    }
+  }
+}

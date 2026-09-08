@@ -1,0 +1,159 @@
+{
+  "project_name": "Riff - Offline-First Audio Streaming",
+  "summary": "An audio streaming app with a Node.js backend, a fast canvas-based player UI, and offline sync so playback survives patchy mobile connectivity.",
+  "constraints": [
+    "must work on intermittent 3G connections",
+    "offline playback of downloaded tracks",
+    "cold start under 2 seconds"
+  ],
+  "target_platforms": ["android", "server"],
+  "source_prompt": "Build an audio streaming app using Node.js and a fast canvas frontend with offline sync",
+  "generator": "devcontext-ai/0.1.0",
+  "model": "fixture (hand-written, not model output)",
+  "nodes": [
+    {
+      "id": "auth",
+      "category": "auth",
+      "title": "Authentication",
+      "requirement": "Email and social login with refresh-token rotation, usable while offline once a session exists.",
+      "search_hint": "jwt refresh token rotation node",
+      "candidates": [
+        {
+          "name": "lucia-auth/lucia",
+          "url": "https://github.com/lucia-auth/lucia",
+          "summary": "Session-based auth library for TypeScript with adapters for most databases. Explicit about token lifecycle, which matters for offline sessions.",
+          "host": "github.com",
+          "published": "2024-11-02",
+          "score": 0.91,
+          "selected": true
+        },
+        {
+          "name": "nextauthjs/next-auth",
+          "url": "https://github.com/nextauthjs/next-auth",
+          "summary": "Batteries-included auth with a large provider catalogue. Heavier and more framework-coupled than needed here.",
+          "host": "github.com",
+          "published": "2024-09-18",
+          "score": 0.84,
+          "selected": false
+        }
+      ],
+      "trends": [
+        {
+          "title": "Anyone else find refresh token rotation harder than the docs suggest?",
+          "url": "https://www.reddit.com/r/node/comments/example_auth_thread",
+          "source": "reddit.com/r/node",
+          "excerpt": "Spent two days on silent refresh before realising the client clock skew was the problem. Worth handling explicitly if your users are on mobile.",
+          "published": "2025-03-14"
+        }
+      ]
+    },
+    {
+      "id": "media_storage",
+      "category": "storage",
+      "title": "Media Storage & Delivery",
+      "requirement": "Store and range-serve audio files so the player can seek without downloading the whole track.",
+      "search_hint": "http range request audio streaming s3",
+      "candidates": [
+        {
+          "name": "minio/minio",
+          "url": "https://github.com/minio/minio",
+          "summary": "S3-compatible object storage that can run locally, which keeps the demo self-contained and avoids cloud credentials during development.",
+          "host": "github.com",
+          "published": "2025-01-20",
+          "score": 0.88,
+          "selected": true
+        }
+      ],
+      "trends": []
+    },
+    {
+      "id": "offline_sync",
+      "category": "database",
+      "title": "Offline Sync Layer",
+      "requirement": "Queue local mutations while offline and reconcile them with the server once connectivity returns, without losing playback position.",
+      "search_hint": "crdt local first sync engine",
+      "candidates": [
+        {
+          "name": "rxdb/rxdb",
+          "url": "https://github.com/pubkey/rxdb",
+          "summary": "Local-first reactive database with a documented replication protocol and conflict handlers. Well suited to intermittent connectivity.",
+          "host": "github.com",
+          "published": "2025-02-11",
+          "score": 0.93,
+          "selected": true
+        },
+        {
+          "name": "automerge/automerge",
+          "url": "https://github.com/automerge/automerge",
+          "summary": "CRDT library giving automatic conflict resolution. More correct in theory, larger payloads in practice.",
+          "host": "github.com",
+          "published": "2024-12-05",
+          "score": 0.86,
+          "selected": false
+        }
+      ],
+      "trends": [
+        {
+          "title": "Local-first sync is the hardest part of any offline app",
+          "url": "https://www.reddit.com/r/reactnative/comments/example_sync_thread",
+          "source": "reddit.com/r/reactnative",
+          "excerpt": "Everyone underestimates reconciliation. Pick a library with a documented conflict strategy or you will write one yourself at 2am.",
+          "published": "2025-04-02"
+        },
+        {
+          "title": "RxDB replication with a custom backend — gotchas",
+          "url": "https://www.reddit.com/r/javascript/comments/example_rxdb_thread",
+          "source": "reddit.com/r/javascript",
+          "excerpt": "Checkpoint handling is the bit the docs gloss over. Budget a day for it.",
+          "published": "2025-05-19"
+        }
+      ]
+    },
+    {
+      "id": "player_ui",
+      "category": "frontend",
+      "title": "Canvas Player UI",
+      "requirement": "Render a waveform scrubber and playback controls at 60fps on mid-range Android hardware.",
+      "search_hint": "canvas waveform renderer performance",
+      "candidates": [
+        {
+          "name": "katspaugh/wavesurfer.js",
+          "url": "https://github.com/katspaugh/wavesurfer.js",
+          "summary": "Mature canvas waveform renderer with a peak-caching path that avoids decoding entire files on the client.",
+          "host": "github.com",
+          "published": "2025-01-08",
+          "score": 0.9,
+          "selected": true
+        }
+      ],
+      "trends": [
+        {
+          "title": "Waveform rendering killed our frame budget on low-end Android",
+          "url": "https://www.reddit.com/r/androiddev/comments/example_waveform_thread",
+          "source": "reddit.com/r/androiddev",
+          "excerpt": "Precompute peaks server-side and ship them as JSON. Decoding audio on the device to draw a waveform is not viable below flagship hardware.",
+          "published": "2025-06-11"
+        }
+      ]
+    },
+    {
+      "id": "api_server",
+      "category": "backend",
+      "title": "Node.js API Server",
+      "requirement": "Expose track metadata, playlist CRUD, and signed media URLs with range-request passthrough.",
+      "search_hint": "fastify streaming range requests",
+      "candidates": [
+        {
+          "name": "fastify/fastify",
+          "url": "https://github.com/fastify/fastify",
+          "summary": "Low-overhead Node framework with first-class stream support and schema-based validation built in.",
+          "host": "github.com",
+          "published": "2025-02-27",
+          "score": 0.89,
+          "selected": true
+        }
+      ],
+      "trends": []
+    }
+  ]
+}
