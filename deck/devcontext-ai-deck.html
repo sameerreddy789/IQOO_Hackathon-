@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DevContext AI — iQOO City Battles 2026 Phase 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0E14; --panel:#131A24; --panel2:#182130; --line:#243244;
+    --text:#E9EEF5; --muted:#9AA7B8; --dim:#6B7A8D;
+    --cyan:#38BDF8; --amber:#FBBF24; --red:#F87171; --green:#4ADE80; --violet:#A78BFA;
+    --sans:'Inter',-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,'Cascadia Mono','Consolas',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:#05080C}
+  body{font-family:var(--sans);color:var(--text);-webkit-font-smoothing:antialiased}
+
+  .slide{
+    position:relative;width:13.333in;height:7.5in;background:var(--bg);
+    padding:0.62in 0.78in 0.55in;overflow:hidden;display:flex;flex-direction:column;
+    page-break-after:always;break-after:page;
+  }
+  .slide::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,var(--cyan) 0%,var(--violet) 42%,var(--amber) 100%)}
+  .slide::after{content:attr(data-n);position:absolute;right:0.78in;bottom:0.4in;
+    font:500 11px/1 var(--mono);color:var(--dim);letter-spacing:.14em}
+  .tag{position:absolute;left:0.78in;bottom:0.4in;font:500 11px/1 var(--mono);
+    color:var(--dim);letter-spacing:.14em;text-transform:uppercase}
+
+  .kicker{font:700 11px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;
+    color:var(--cyan);margin-bottom:14px;display:flex;align-items:center;gap:9px}
+  .kicker svg{width:15px;height:15px;flex:none}
+  h1{font-size:60px;font-weight:800;letter-spacing:-.028em;line-height:1.02}
+  h2{font-size:37px;font-weight:750;letter-spacing:-.02em;line-height:1.12;margin-bottom:8px}
+  h3{font-size:17px;font-weight:700;letter-spacing:-.01em;margin-bottom:5px}
+  .sub{font-size:17px;color:var(--muted);line-height:1.5;max-width:9.6in}
+  .lede{font-size:20px;color:var(--muted);line-height:1.45;max-width:10in;margin-top:6px}
+  em{color:var(--text);font-style:normal;font-weight:600}
+  .body{flex:1;display:flex;flex-direction:column;justify-content:center}
+
+  /* ---- title ---- */
+  .center{align-items:flex-start;justify-content:center}
+  .brandmark{display:flex;align-items:center;gap:13px;margin-bottom:30px}
+  .brandmark .glyph{width:44px;height:44px;border-radius:11px;flex:none;
+    background:linear-gradient(140deg,#0EA5E9,#7C3AED);display:flex;align-items:center;justify-content:center}
+  .brandmark .glyph svg{width:24px;height:24px}
+  .brandmark .nm{font:800 21px/1 var(--sans);letter-spacing:-.02em}
+  .brandmark .nm span{color:var(--dim);font-weight:500;display:block;font-size:11.5px;
+    letter-spacing:.15em;margin-top:4px;font-family:var(--mono);text-transform:uppercase}
+  .metarow{display:flex;gap:10px;margin-top:34px;flex-wrap:wrap}
+  .chip{font:600 12.5px/1 var(--sans);padding:8px 14px;border-radius:999px;
+    border:1px solid var(--line);color:var(--muted);background:var(--panel)}
+  .chip b{color:var(--text);font-weight:700}
+  .chip.hot{border-color:rgba(251,191,36,.4);background:rgba(251,191,36,.08);color:var(--amber)}
+
+  /* ---- grids ---- */
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:19px 20px}
+  .card .ic{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;
+    justify-content:center;margin-bottom:12px;background:var(--panel2);border:1px solid var(--line)}
+  .card .ic svg{width:17px;height:17px}
+  .card p{font-size:14px;color:var(--muted);line-height:1.5}
+  .card.accent{border-color:rgba(56,189,248,.34);background:linear-gradient(160deg,rgba(56,189,248,.09),transparent 65%)}
+
+  /* ---- flow ---- */
+  .flow{display:flex;align-items:stretch;gap:0;margin-top:6px}
+  .step{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:15px 13px;position:relative}
+  .step.local{border-color:rgba(74,222,128,.42);background:linear-gradient(165deg,rgba(74,222,128,.1),transparent 70%)}
+  .step.cloud{border-color:rgba(56,189,248,.42);background:linear-gradient(165deg,rgba(56,189,248,.1),transparent 70%)}
+  .step.bridge{border-color:rgba(167,139,250,.42);background:linear-gradient(165deg,rgba(167,139,250,.1),transparent 70%)}
+  .step .n{font:700 10px/1 var(--mono);color:var(--dim);letter-spacing:.16em;margin-bottom:9px}
+  .step .t{font-size:14.5px;font-weight:750;letter-spacing:-.01em;margin-bottom:6px}
+  .step .d{font-size:11.5px;color:var(--muted);line-height:1.45}
+  .arrow{flex:none;width:26px;display:flex;align-items:center;justify-content:center}
+  .arrow svg{width:15px;height:15px;color:var(--dim)}
+  .lane{display:flex;gap:8px;margin-top:15px;font:600 11.5px/1 var(--mono);letter-spacing:.06em}
+  .lane div{padding:7px 12px;border-radius:7px;border:1px solid var(--line);color:var(--muted)}
+  .lane .a{border-color:rgba(74,222,128,.4);color:var(--green)}
+  .lane .b{border-color:rgba(56,189,248,.4);color:var(--cyan)}
+  .lane .c{border-color:rgba(167,139,250,.4);color:var(--violet)}
+
+  /* ---- stats ---- */
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:18px 20px}
+  .stat .v{font:800 33px/1 var(--sans);letter-spacing:-.03em;margin-bottom:7px}
+  .stat .k{font-size:12.5px;color:var(--muted);line-height:1.4}
+  .stat.ok .v{color:var(--green)} .stat.warn .v{color:var(--amber)} .stat.info .v{color:var(--cyan)}
+
+  /* ---- code / tree ---- */
+  pre{font:500 13px/1.62 var(--mono);background:var(--panel);border:1px solid var(--line);
+    border-radius:12px;padding:17px 19px;color:var(--muted);white-space:pre;overflow:hidden}
+  pre b{color:var(--text);font-weight:700} pre i{color:var(--green);font-style:normal}
+  pre .c{color:var(--dim)}
+
+  /* ---- table ---- */
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th{text-align:left;font:700 10.5px/1 var(--mono);letter-spacing:.15em;text-transform:uppercase;
+    color:var(--dim);padding:0 12px 10px;border-bottom:1px solid var(--line)}
+  td{padding:11px 12px;border-bottom:1px solid rgba(36,50,68,.6);color:var(--muted);vertical-align:top}
+  td:first-child{color:var(--text);font-weight:600}
+  tr:last-child td{border-bottom:none}
+  .pill{display:inline-block;font:700 10px/1 var(--mono);padding:4px 8px;border-radius:5px;letter-spacing:.08em}
+  .pill.done{background:rgba(74,222,128,.15);color:var(--green)}
+  .pill.next{background:rgba(251,191,36,.15);color:var(--amber)}
+  .pill.red{background:rgba(248,113,113,.15);color:var(--red)}
+  .pill.grn{background:rgba(74,222,128,.15);color:var(--green)}
+
+  .note{margin-top:16px;padding:13px 17px;border-left:2px solid var(--amber);
+    background:rgba(251,191,36,.06);border-radius:0 9px 9px 0;font-size:13.5px;
+    color:var(--muted);line-height:1.5}
+  .note b{color:var(--amber)}
+
+  @page{size:13.333in 7.5in;margin:0}
+  @media print{
+    html,body{background:#fff}
+    .slide{margin:0!important;box-shadow:none!important}
+    *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  }
+  @media screen{.slide{margin:22px auto;box-shadow:0 22px 60px rgba(0,0,0,.6);border-radius:6px}}
+</style>
+</head>
+<body>
+
+<!-- 1 ─ TITLE -->
+<section class="slide center" data-n="01">
+  <div class="brandmark">
+    <div class="glyph">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3a4 4 0 0 0-4 4v1a3 3 0 0 0 0 6v1a4 4 0 0 0 8 0v-1a3 3 0 0 0 0-6V7a4 4 0 0 0-4-4Z"/>
+        <path d="M12 3v18"/>
+      </svg>
+    </div>
+    <div class="nm">DevContext AI<span>iQOO City Battles 2026</span></div>
+  </div>
+
+  <h1>Your project's brain,<br>built before you code.</h1>
+  <p class="lede">A phone-first architecture blueprinting canvas. Speak an idea or photograph a
+    whiteboard, and an on-device model turns it into a vetted, persistent project scaffold —
+    delivered straight into your IDE.</p>
+
+  <div class="metarow">
+    <div class="chip"><b>Track 06</b> &nbsp;Developer Tools</div>
+    <div class="chip hot">City Battles + National Grand Finale eligible</div>
+    <div class="chip">Chennai City Battle &nbsp;<b>12–13 Sept 2026</b></div>
+  </div>
+  <span class="tag">Phase 1 · Idea Submission</span>
+</section>
+
+<!-- 2 ─ PROBLEM -->
+<section class="slide" data-n="02">
+  <div class="kicker">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+    The problem
+  </div>
+  <h2>The most expensive hour of any project<br>is the first one.</h2>
+  <p class="sub">It is spent in browser tabs, not in an editor — and nothing survives it.</p>
+
+  <div class="body">
+    <div class="g4">
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#F87171" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h10M4 18h6"/></svg></div>
+        <h3>The scaffold loop</h3>
+        <p>Hours lost bouncing between GitHub, docs and an empty editor just to decide on a structure.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="4"/></svg></div>
+        <h3>Blind dependency picks</h3>
+        <p>Keyword search ranks READMEs and stars. It cannot tell you a library has been dead for a year.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linecap="round"><path d="M8 10h8M8 14h5"/><path d="M21 12a8 8 0 0 1-8 8H7l-4 3v-7a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8Z"/></svg></div>
+        <h3>Unread community signal</h3>
+        <p>The Reddit thread that already solved your problem is never opened during planning.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"><path d="M3 7h18v12H3zM3 7l3-4h12l3 4"/><path d="M9 12h6"/></svg></div>
+        <h3>Nothing persists</h3>
+        <p>Every decision and its reasoning dies with the closed tab. The next developer starts blind.</p>
+      </div>
+    </div>
+    <div class="note"><b>The gap:</b> tooling helps you write code. Almost nothing helps you decide
+      what to write — and nothing records <em>why</em> you decided it.</div>
+  </div>
+  <span class="tag">DevContext AI</span>
+</section>
+
+<!-- 3 ─ PERSONA -->
+<section class="slide" data-n="03">
+  <div class="kicker">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
+    Who this is for
+  </div>
+  <h2>The developer with no architect to ask.</h2>
+
+  <div class="body">
+    <div class="g2">
+      <div class="card accent">
+        <h3 style="font-size:19px">Early-career engineers at Indian IT service providers</h3>
+        <p style="margin-top:9px">TCS, Infosys, Wipro, Cognizant. Handed a new project, expected to
+          stand up modern full-stack scaffolding from scratch, with minimal access to a senior
+          system architect.</p>
+      </div>
+      <div class="card accent">
+        <h3 style="font-size:19px">Tier-2 and Tier-3 college engineering students</h3>
+        <p style="margin-top:9px">Building their first real projects with no mentor to review
+          architecture choices, and no way to tell a maintained library from an abandoned one.</p>
+      </div>
+    </div>
+
+    <div class="g3" style="margin-top:20px">
+      <div class="stat warn"><div class="v">Hundreds</div><div class="k">of hours lost to clashing boilerplate and misconfigured dependencies</div></div>
+      <div class="stat warn"><div class="v">Zero</div><div class="k">architectural review before the first commit lands</div></div>
+      <div class="stat info"><div class="v">Off-desk</div><div class="k">where the decisions actually happen: standups, commutes, whiteboards</div></div>
+    </div>
+    <div class="note">Why phone-first: the <em>blueprint</em> phase is already mobile, even when the
+      build is not. We meet the decision where it happens instead of forcing it back to a desk.</div>
+  </div>
+  <span class="tag">DevContext AI</span>
+</section>
+
+<!-- 4 ─ ARCHITECTURE -->
+<section class="slide" data-n="04">
+  <div class="kicker">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M10 6.5h4a3 3 0 0 1 3 3V14"/></svg>
+    How it works
+  </div>
+  <h2>Five components. One pass. No backend.</h2>
+  <p class="sub">Scope was deliberately cut from fifteen modules to five so it ships inside 19 on-site hours.</p>
+
+  <div class="body">
+    <div class="flow">
+      <div class="step local"><div class="n">01</div><div class="t">Capture</div><div class="d">Voice, or camera on a whiteboard sketch via on-device ML Kit OCR.</div></div>
+      <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="step local"><div class="n">02</div><div class="t">Decompose</div><div class="d">Quantized SLM on the Snapdragon NPU emits an architecture node graph. Offline.</div></div>
+      <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="step cloud"><div class="n">03</div><div class="t">Scout</div><div class="d">Exa neural search vets repos across GitHub, GitLab, Bitbucket — plus Reddit sentiment.</div></div>
+      <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="step local"><div class="n">04</div><div class="t">Curate</div><div class="d">Tap nodes on the canvas, compare health and sentiment, approve the stack.</div></div>
+      <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="step bridge"><div class="n">05</div><div class="t">Compile</div><div class="d">Office Kit carries the payload to a CLI listener that writes the brain folder.</div></div>
+    </div>
+
+    <div class="lane">
+      <div class="a">ON DEVICE · OFFLINE</div>
+      <div class="b">CLOUD · DIRECT HTTPS</div>
+      <div class="c">OFFICE KIT BRIDGE</div>
+    </div>
+
+    <div class="note"><b>Deliberate omission:</b> there is no orchestration backend. The client calls
+      Exa directly, because a localhost dependency cannot function during Red Light —
+      <em>55% of the on-site build window.</em></div>
+  </div>
+  <span class="tag">DevContext AI</span>
+</section>
+
+<!-- 5 ─ ON-DEVICE AI -->
+<section class="slide" data-n="05">
+  <div class="kicker">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6v6H9zM9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>
+    On-device intelligence
+  </div>
+  <h2>The brain never leaves the phone.</h2>
+  <p class="sub">Already proven on a laptop. Verbatim model output is committed in the repository.</p>
+
+  <div class="body">
+    <div class="g4">
+      <div class="stat ok"><div class="v">5 / 5</div><div class="k">requests produced schema-valid node graphs</div></div>
+      <div class="stat ok"><div class="v">1st try</div><div class="k">every one. The JSON repair loop never had to fire</div></div>
+      <div class="stat ok"><div class="v">Offline</div><div class="k">confirmed against a fully blocked network</div></div>
+      <div class="stat info"><div class="v">70</div><div class="k">automated checks green across two suites</div></div>
+    </div>
+
+    <div class="g2" style="margin-top:18px;grid-template-columns:1.15fr .85fr">
+      <div>
+        <pre><span class="c"># quantized Phi-3-mini int4 · onnxruntime-genai · no network</span>
+$ python -m devcontext.decompose --suite
+
+[1/5] audio streaming, offline sync      <i>VALID</i>   4 nodes
+[2/5] telemedicine booking, payments     <i>VALID</i>   4 nodes
+[3/5] cli photo dedupe, perceptual hash  <i>VALID</i>   2 nodes
+[4/5] offline attendance, tier-2 college <i>VALID</i>   3 nodes
+[5/5] realtime quiz game, anti-cheat     <i>VALID</i>   4 nodes
+
+<b>schema-valid: 5/5 — suite green</b></pre>
+      </div>
+      <div class="card" style="border-color:rgba(251,191,36,.36);background:linear-gradient(160deg,rgba(251,191,36,.08),transparent 68%)">
+        <div class="ic" style="border-color:rgba(251,191,36,.4)"><svg viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>492 seconds on laptop CPU</h3>
+        <p style="margin-top:8px">That average is the entire case for the on-site work, not a
+          footnote. A 3.8B int4 model on CPU is nowhere near interactive.</p>
+        <p style="margin-top:11px;color:var(--amber);font-weight:600">NPU acceleration is what makes
+          this loop usable on the phone — and it is the first Green Light task in Chennai.</p>
+      </div>
+    </div>
+  </div>
+  <span class="tag">DevContext AI</span>
+</section>
+
+<!-- 6 ─ ARTIFACT -->
+<section class="slide" data-n="06">
+  <div class="kicker">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>
+    The artifact
+  </div>
+  <h2>It leaves something behind.</h2>
+  <p class="sub">Every other tool closes a tab. This one writes a folder that outlives the session.</p>
+
+  <div class="body">
+    <div class="g2" style="grid-template-columns:1.02fr .98fr">
+      <pre>my-new-project/
+<b>├── .devcontext/</b>            <span class="c">the project brain</span>
+│   ├── <b>context.json</b>         <span class="c">what was chosen, and why</span>
+│   ├── <b>semantic_cache.db</b>    <span class="c">portable vector store</span>
+│   ├── <b>open_source_maps/</b>    <span class="c">vetted tooling per node</span>
+│   └── <b>trends_report.md</b>     <span class="c">community risk log</span>
+└── <b>init.sh</b>                  <span class="c">one command bootstrap</span>
+
+<span class="c">$ bash init.sh</span>
+<i>[clone]</i> rxdb          <span class="c">→ reference/</span>
+<i>[clone]</i> fastify       <span class="c">→ reference/</span>
+<i>[deps]</i>  Node detected → npm install</pre>
+
+      <div style="display:flex;flex-direction:column;gap:13px">
+        <div class="card accent">
+          <h3>context.json is the point</h3>
+          <p style="margin-top:7px">A structural ledger recording not just the stack but the
+            reasoning. It stays in the repo as a permanent brief for the next teammate — or the
+            next AI coding agent.</p>
+        </div>
+        <div class="card">
+          <h3>Rationale is composed from evidence</h3>
+          <p style="margin-top:7px">Never generated by the model. A hallucinated justification in a
+            file that outlives the project is worse than none at all.</p>
+        </div>
+        <div class="card">
+          <h3>Search results are untrusted input</h3>
+          <p style="margin-top:7px">init.sh shallow-clones vetted repos read-only into
+            <span style="font-family:var(--mono);font-size:12.5px">reference/</span> and resolves
+            dependencies only from your own manifests. No blind installs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="tag">DevContext AI</span>
+</section>
+
+<!-- 7 ─ OFFICE KIT -->
+<section class="slide" data-n="07">
+  <div class="kicker">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="13" height="9" rx="1.5"/><rect x="16" y="9" width="6" height="11" rx="1.5"/><path d="M6 17h5"/></svg>
+    Cross-device bridge
+  </div>
+  <h2>Office Kit is the product, not a checkbox.</h2>
+  <p class="sub">The handoff generates bridge activity because it <em>is</em> the core loop — nothing was bolted on for telemetry.</p>
+
+  <div class="body">
+    <div class="g3">
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg></div>
+        <h3>Shared clipboard</h3>
+        <p>The compiled node-graph payload crosses as structured JSON, phone to laptop.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg></div>
+        <h3>File transfer</h3>
+        <p>Larger payloads and build bundles move by drag-and-drop across the bridge.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M8 10h.01M12 10h.01M16 10h.01M8 14h8"/></svg></div>
+        <h3>Remote control</h3>
+        <p>Laptop keyboard drives phone fields through screen mirroring during Red Light.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:18px;background:var(--panel2)">
+      <div style="display:flex;align-items:center;gap:14px;font:600 13.5px/1.5 var(--mono);flex-wrap:wrap">
+        <span style="color:var(--green)">PHONE</span>
+        <span style="color:var(--dim)">compiles payload</span>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#6B7A8D" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <span style="color:var(--violet)">OFFICE KIT</span>
+        <span style="color:var(--dim)">clipboard + file</span>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#6B7A8D" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <span style="color:var(--cyan)">CLI LISTENER</span>
+        <span style="color:var(--dim)">writes .devcontext/</span>
+      </div>
+    </div>
+
+    <div class="note"><b>Precise about the mechanism:</b> the bridge transports the payload; the CLI
+      listener performs the filesystem write. A clipboard cannot create a directory, and we do not
+      claim it does.</div>
+  </div>
+  <span class="tag">DevContext AI</span>
+</section>
+
+<!-- 8 ─ STATUS -->
+<section class="slide" data-n="08">
+  <div class="kicker">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>
+    Honest status
+  </div>
+  <h2>What already works, and what does not.</h2>
+  <p class="sub">All of the below is public in the submitted repository.</p>
+
+  <div class="body">
+    <table>
+      <thead><tr><th style="width:19%">Component</th><th style="width:15%">Status</th><th>Evidence</th></tr></thead>
+      <tbody>
+        <tr><td>Decompose</td><td><span class="pill done">BUILT</span></td>
+            <td>Quantized Phi-3-mini int4 via onnxruntime-genai. 5/5 schema-valid, all first-attempt. Offline verified against a blocked network. Verbatim output committed.</td></tr>
+        <tr><td>Compile</td><td><span class="pill done">BUILT</span></td>
+            <td>Full <span style="font-family:var(--mono);font-size:12.5px">.devcontext/</span> tree plus a syntax-checked <span style="font-family:var(--mono);font-size:12.5px">init.sh</span>. 34 automated checks.</td></tr>
+        <tr><td>Scout</td><td><span class="pill next">WIRED</span></td>
+            <td>Exa integration complete against the published contract, unit-tested on synthetic responses. Live API run pending a key.</td></tr>
+        <tr><td>Capture</td><td><span class="pill next">ON-SITE</span></td>
+            <td>Camera OCR via ML Kit and microphone STT. Scheduled Saturday Red Light.</td></tr>
+        <tr><td>Curate</td><td><span class="pill next">ON-SITE</span></td>
+            <td>Flutter node-graph canvas. Scheduled first Green Light window.</td></tr>
+        <tr><td>NPU runtime</td><td><span class="pill next">ON-SITE</span></td>
+            <td>onnxruntime-genai Android bindings. Highest-risk task, with a documented fallback and a decision deadline.</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><b>Why show the gaps:</b> a jury can verify every claim above in the repo. We would
+      rather demo five components that fully work than describe fifteen that do not.</div>
+  </div>
+  <span class="tag">DevContext AI</span>
+</section>
+
+<!-- 9 ─ ON-SITE PLAN -->
+<section class="slide" data-n="09">
+  <div class="kicker">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+    Chennai execution
+  </div>
+  <h2>19 hours, planned around the format.</h2>
+  <p class="sub">Red Light is 55% of the build. Everything below is sequenced so no Red hour needs an unrestricted laptop.</p>
+
+  <div class="body">
+    <div class="g2">
+      <div class="card" style="border-color:rgba(74,222,128,.35)">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px">
+          <span class="pill grn">GREEN · 8.5 H</span><span style="font-size:12.5px;color:var(--dim)">dual device</span>
+        </div>
+        <p style="line-height:1.75">Flutter scaffold and Android toolchain<br>
+          <em>adb reverse hot-reload set up before the first Red window</em><br>
+          ONNX Runtime Android bridge and first on-device inference<br>
+          NPU delegate configuration · heavy compiles · repo pushes</p>
+      </div>
+      <div class="card" style="border-color:rgba(248,113,113,.35)">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px">
+          <span class="pill red">RED · 10.5 H</span><span style="font-size:12.5px;color:var(--dim)">phone only, via Office Kit</span>
+        </div>
+        <p style="line-height:1.75">Node canvas built through live reload on the mirrored screen<br>
+          Camera OCR and microphone capture on the loaner device<br>
+          On-device prompt tuning at real context limits<br>
+          Office Kit handoff testing · demo rehearsal</p>
+      </div>
+    </div>
+
+    <div class="g3" style="margin-top:18px">
+      <div class="stat info"><div class="v">Sat 19:00</div><div class="k">Checkpoint: canvas, camera OCR and voice live on the phone</div></div>
+      <div class="stat info"><div class="v">Sun 01:00</div><div class="k">Hard decision point on the NPU bridge, with a documented fallback</div></div>
+      <div class="stat ok"><div class="v">Sun 09:00</div><div class="k">Full loop: speak an idea, brain folder lands on the laptop</div></div>
+    </div>
+    <div class="note"><b>Pre-loaded:</b> the 2.73 GB quantized model is already on disk. It took
+      3 h 21 min to fetch and will not be pulled over event wifi.</div>
+  </div>
+  <span class="tag">DevContext AI</span>
+</section>
+
+<!-- 10 ─ TEAM -->
+<section class="slide" data-n="10">
+  <div class="kicker">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 20v-1a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v1"/><circle cx="9.5" cy="7" r="3.5"/><path d="M17 11a3.5 3.5 0 1 0-2-6.4"/><path d="M21 20v-1a4 4 0 0 0-3-3.8"/></svg>
+    The team
+  </div>
+  <h2>Production frontend, plus low-level automation.</h2>
+
+  <div class="body">
+    <div class="g3">
+      <div class="card">
+        <h3>MohanaMantra 2K26 portal</h3>
+        <p style="margin-top:7px">Production web infrastructure for Mohan Babu University's national
+          cultural festival. Asset preloading pipelines, Zustand state architecture, GSAP and Framer
+          Motion UI. Passed RapidScan audits across 80+ vulnerability vectors with zero flaws.</p>
+      </div>
+      <div class="card">
+        <h3>AIStream research suite</h3>
+        <p style="margin-top:7px">Localized Streamlit application wrapping multi-modal research
+          tools, structuring external documentation through automated semantic index routing.</p>
+      </div>
+      <div class="card">
+        <h3>ArduPilot navigation modules</h3>
+        <p style="margin-top:7px">Autonomous drone workspace modules in WSL/Ubuntu. Bash
+          compilation workflows and vector trajectory alignment in simulation.</p>
+      </div>
+    </div>
+
+    <div class="card accent" style="margin-top:18px">
+      <h3 style="font-size:20px">We showed up with the hard part already solved.</h3>
+      <p style="margin-top:9px;font-size:15px">The local inference pipeline, the JSON schema
+        contract, the repair loop and the artifact generator were built and verified <em>before</em>
+        this submission. Chennai is for the phone layer, not for discovery. That is deliberate: it
+        moves the highest-uncertainty work off the clock, and it is why we cut scope from fifteen
+        modules to five before writing a line of code.</p>
+    </div>
+
+    <div class="metarow" style="margin-top:18px">
+      <div class="chip"><b>Repo</b> &nbsp;github.com/sameerreddy789/IQOO_Hackathon-</div>
+      <div class="chip hot">Track 06 · Developer Tools · Finale eligible</div>
+    </div>
+  </div>
+  <span class="tag">DevContext AI · Phase 1</span>
+</section>
+
+</body>
+</html>
